@@ -92,6 +92,7 @@ def rsp_rvt(
       changes and "missed" deep breaths. Neuroimage, 204, 116234.
     * Harrison, S. J., Bianchi, S., Heinzle, J., Stephan, K. E., Iglesias, S., & Kasper, L. (2021).
       A Hilbert-based method for processing respiratory timeseries. Neuroimage, 230, 117787.
+
     """
     method = method.lower()  # remove capitalised letters
     if method in ["harrison", "harrison2021"]:
@@ -325,7 +326,7 @@ def _rsp_rvt_find_min(increase_inds, fr_phase, smaller_index, silent):
     n_min = increase_inds[bigger_n_max]
     fr_min = fr_phase[n_min].squeeze()
     # Sometime fr_min is the same as n_max and it caused problems
-    if fr_phase[smaller_index].squeeze() < fr_min:
+    if fr_phase[smaller_index].squeeze() <= fr_min:
         if not silent:
             warn(
                 "rsp_rvt(): The next bigger increasing index has a bigger value than the chosen decreasing index, "
